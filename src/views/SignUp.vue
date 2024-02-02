@@ -7,7 +7,10 @@
           <p class="text-xs-center">
             <!--            <router-link :to="{name: 'sign-in'}">Have an account?</router-link>-->
           </p>
-          Validation Errors
+          <mcv-validations-errors
+            v-if="validationErrors"
+            :validation-errors="validationErrors"
+          />
           <form @submit.prevent="onSubmit">
             <fieldset class="form-group">
               <input
@@ -47,8 +50,10 @@
 </template>
 
 <script>
+import McvValidationsErrors from '@/components/ValidationsErrors.vue'
 export default {
   name: 'McvSignUp',
+  components: {McvValidationsErrors},
   data() {
     return {
       email: '',
@@ -59,6 +64,9 @@ export default {
   computed: {
     isSubmitting() {
       return this.$store.state.auth.isSubmitting
+    },
+    validationErrors() {
+      return this.$store.state.auth.validationErrors
     },
   },
   methods: {

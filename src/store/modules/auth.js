@@ -4,14 +4,14 @@ import {setItem} from '@/helpers/persistanceStorage'
 const state = {
   isSubmitting: false,
   currentUser: null,
-  validationsErrors: null,
+  validationErrors: null,
   isLoggedIn: null,
 }
 
 const mutations = {
   registerStart(state) {
     state.isSubmitting = true
-    state.validationsErrors = null
+    state.validationErrors = null
   },
   registerSuccess(state, payload) {
     state.isSubmitting = false
@@ -20,7 +20,7 @@ const mutations = {
   },
   registerFailed(state, payload) {
     state.isSubmitting = false
-    state.validationsErrors = payload
+    state.validationErrors = payload
   },
 }
 
