@@ -1,4 +1,5 @@
 import authApi from '@/api/auth'
+import {setItem} from '@/helpers/persistanceStorage'
 
 const state = {
   isSubmitting: false,
@@ -31,15 +32,13 @@ const actions = {
         .register(credentials)
         .then((res) => {
           context.commit('registerSuccess', res.data.user)
+          setItem('successToken', res.data.user.token)
           resolve(res.data.user)
         })
         .catch((res) => {
           context.commit('registerFailed', res.response.data.errors)
         })
     })
-    // setTimeout(() => {
-    //   context.commit('registerStart')
-    // }, 1300)
   },
 }
 export default {
