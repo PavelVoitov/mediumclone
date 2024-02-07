@@ -1,7 +1,7 @@
 <template>
   <ul>
     <li :key="error" v-for="error of errorMassages" class="error">
-      {{ error }}
+      {{ error[0] }} {{ error[1][0] }}
     </li>
   </ul>
 </template>
@@ -17,7 +17,8 @@ export default {
   },
   computed: {
     errorMassages() {
-      return Object.values(this.validationErrors).flat()
+      // return Object.values(this.validationErrors).flat()
+      return Object.entries(this.validationErrors)
     },
   },
 }
