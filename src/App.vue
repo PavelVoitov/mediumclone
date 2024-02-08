@@ -1,17 +1,16 @@
 <template>
-  <header>
-    Hello World
-    <nav>
-      <router-link :to="{name: 'home'}">Home</router-link> |
-      <router-link :to="{name: 'sign-in'}">Sign In</router-link> |
-      <router-link :to="{name: 'sign-up'}">Sign Up</router-link> |
-      <router-link :to="{name: 'about'}">About</router-link>
-    </nav>
-  </header>
-
+  <mcv-top-bar />
   <router-view />
 </template>
 
-<script setup></script>
+<script>
+import McvTopBar from '@/components/TopBar.vue'
+export default {
+  name: 'McvApp',
+  components: {
+    McvTopBar,
+  },
+}
+</script>
 
 <style></style>

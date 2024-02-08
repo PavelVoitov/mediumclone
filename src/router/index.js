@@ -28,6 +28,21 @@ const routes = [
     name: 'sign-in',
     component: SignIn,
   },
+  {
+    path: '/create-article',
+    name: 'createArticle',
+    component: null,
+  },
+  {
+    path: '/settings',
+    name: 'settings',
+    component: null,
+  },
+  {
+    path: '/user-profile',
+    name: 'userProfile',
+    component: null,
+  },
 ]
 
 const router = createRouter({

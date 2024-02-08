@@ -57,12 +57,19 @@ const actions = {
       authApi
         .login(credential)
         .then((res) => {
-          context.commit(mutationTypes.registerSuccess, res)
+          context.commit(mutationTypes.registerSuccess, res.data.user)
           setItem('successToken', res.data.user.token)
           resolve(res.data.user)
         })
         .catch((err) => {
-          context.commit(mutationTypes.registerFailed, err.response.data.errors)
+          let errorMessage
+          if (err.response !== undefined) {
+            errorMessage = err.response.data.errors
+          } else {
+            errorMessage = err.message
+          }
+
+          context.commit(mutationTypes.registerFailed, errorMessage)
         })
     })
   },
