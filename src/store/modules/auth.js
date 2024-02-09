@@ -3,6 +3,7 @@ import {setItem} from '@/helpers/persistanceStorage'
 
 const state = {
   isSubmitting: false,
+  isLoading: false,
   currentUser: null,
   validationErrors: null,
   isLoggedIn: null,
@@ -12,11 +13,16 @@ export const mutationTypes = {
   registerStart: '[auth] registerStart',
   registerFailed: '[auth] registerFailed',
   registerSuccess: '[auth] registerSuccess',
+
+  getCurrentUserStart: '[auth] getCurrentUserStart',
+  getCurrentUserSuccess: '[auth] getCurrentUserSuccess',
+  getCurrentUserFailed: '[auth] getCurrentUserFailed',
 }
 
 export const actionTypes = {
   register: '[auth] register',
   login: '[auth] login',
+  getCurrentUser: '[auth] getCurrentUser',
 }
 
 export const getterTypes = {
@@ -51,6 +57,19 @@ const mutations = {
     state.isSubmitting = false
     state.validationErrors = payload
   },
+  [mutationTypes.getCurrentUserStart](state) {
+    state.isLoading = true
+  },
+  [mutationTypes.getCurrentUserSuccess](state, payload) {
+    state.isLoading = false
+    state.currentUser = payload
+    state.isLoggedIn = true
+  },
+  [mutationTypes.getCurrentUserFailed](state) {
+    state.isLoading = false
+    state.isLoggedIn = false
+    state.currentUser = null
+  },
 }
 
 const actions = {
@@ -61,7 +80,7 @@ const actions = {
         .register(credentials)
         .then((res) => {
           context.commit(mutationTypes.registerSuccess, res.data.user)
-          setItem('successToken', res.data.user.token)
+          setItem('accessToken', res.data.user.token)
           resolve(res.data.user)
         })
         .catch((res) => {
@@ -76,7 +95,7 @@ const actions = {
         .login(credential)
         .then((res) => {
           context.commit(mutationTypes.registerSuccess, res.data.user)
-          setItem('successToken', res.data.user.token)
+          setItem('accessToken', res.data.user.token)
           resolve(res.data.user)
         })
         .catch((err) => {
@@ -88,6 +107,20 @@ const actions = {
           }
 
           context.commit(mutationTypes.registerFailed, errorMessage)
+        })
+    })
+  },
+  [actionTypes.getCurrentUser](context) {
+    context.commit(mutationTypes.getCurrentUserStart)
+    return new Promise((resolve) => {
+      authApi
+        .getCurrentUser()
+        .then((res) => {
+          context.commit(mutationTypes.registerSuccess, res.data.user)
+          resolve(res.data.user)
+        })
+        .catch(() => {
+          context.commit(mutationTypes.getCurrentUserFailed)
         })
     })
   },

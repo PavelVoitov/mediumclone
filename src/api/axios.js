@@ -1,4 +1,12 @@
 import axios from 'axios'
-axios.defaults.baseURL = 'https://conduit.productionready.io/api'
+import {getItem} from '@/helpers/persistanceStorage'
+
+// axios.defaults.baseURL = 'https://conduit.productionready.io/api'
+axios.defaults.baseURL = 'https://api.realworld.io/api'
 // axios.defaults.baseURL = 'http://localhost:3000/api'
+axios.interceptors.request.use((config) => {
+  const token = getItem('accessToken')
+  config.headers.Authorization = token ? `Token ${token}` : ''
+  return config
+})
 export default axios
