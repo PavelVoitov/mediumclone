@@ -37,7 +37,7 @@
           <li class="nav-item">
             <router-link
               class="nav-link"
-              :to="{name: 'userProfile', params: {slag: currentUser.name}}"
+              :to="{name: 'userProfile', params: {slug: currentUser.username}}"
               active-class="active"
             >
               <img

@@ -10,6 +10,16 @@ const routes = [
     component: GlobalFeed,
   },
   {
+    path: '/feed',
+    name: 'yourFeed',
+    component: null,
+  },
+  {
+    path: '/tags/:slug',
+    name: 'tag',
+    component: null,
+  },
+  {
     path: '/about',
     name: 'about',
     // route level code-splitting
@@ -29,18 +39,33 @@ const routes = [
     component: SignIn,
   },
   {
-    path: '/create-article',
-    name: 'createArticle',
-    component: null,
-  },
-  {
     path: '/settings',
     name: 'settings',
     component: null,
   },
   {
-    path: '/user-profile',
+    path: '/profiles/:slug',
     name: 'userProfile',
+    component: null,
+  },
+  {
+    path: '/profiles/:slug/favorites',
+    name: 'userProfileFavorites',
+    component: null,
+  },
+  {
+    path: '/articles/new',
+    name: 'createArticle',
+    component: null,
+  },
+  {
+    path: '/articles/:slug',
+    name: 'article',
+    component: null,
+  },
+  {
+    path: '/articles/:slug/edit',
+    name: 'editArticle',
     component: null,
   },
 ]
