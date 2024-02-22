@@ -10,7 +10,6 @@
       </div>
     </div>
   </div>
-  <!--  <mcv-feed />-->
 </template>
 
 <script>
