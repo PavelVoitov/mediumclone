@@ -69,7 +69,6 @@ export default {
   data() {
     return {
       limit,
-      // url: this.baseUrl,
     }
   },
   computed: {
