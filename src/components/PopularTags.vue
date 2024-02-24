@@ -1,17 +1,20 @@
 <template>
-  <mcv-loading v-if="isLoading" />
-  <mcv-error v-if="error" :message="error" />
-  <div v-if="popularTags" class="sidebar">
-    <p>Popular Tags</p>
-    <div class="tag-list">
-      <router-link
-        v-for="popularTag of popularTags"
-        :key="popularTag"
-        :to="{name: 'tag', params: {slug: popularTag}}"
-        class="tag-default tag-pill"
-      >
-        {{ popularTag }}
-      </router-link>
+  <div>
+    <mcv-loading v-if="isLoading" />
+    <mcv-error v-if="error" :message="error" />
+
+    <div v-if="popularTags" class="sidebar">
+      <p>Popular Tags</p>
+      <div class="tag-list">
+        <router-link
+          v-for="popularTag of popularTags"
+          :key="popularTag"
+          :to="{name: 'tag', params: {slug: popularTag}}"
+          class="tag-default tag-pill"
+        >
+          {{ popularTag }}
+        </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -23,7 +26,7 @@ import McvLoading from '@/components/Loading.vue'
 import McvError from '@/components/Error.vue'
 
 export default {
-  name: 'PopularTags',
+  name: 'McvPopularTags',
   components: {McvError, McvLoading},
   data() {
     return {
@@ -37,21 +40,8 @@ export default {
       error: (state) => state.popularTags.error,
     }),
   },
-  methods: {
-    setCurrentTag(tag) {
-      this.currentTag = tag
-    },
-    fetchTags() {
-      this.$store.dispatch(actionTypes.getPopularTags)
-    },
-  },
-  watch: {
-    currentTag() {
-      this.fetchTags()
-    },
-  },
   mounted() {
-    this.fetchTags()
+    this.$store.dispatch(actionTypes.getPopularTags)
   },
 }
 </script>

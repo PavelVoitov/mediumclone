@@ -5,7 +5,7 @@
     <div v-if="feed">
       <div
         class="article-preview"
-        v-for="(article, index) of feed.articles"
+        v-for="(article, index) in feed.articles"
         :key="index"
       >
         <div class="article-meta">
@@ -95,6 +95,9 @@ export default {
     currentPage() {
       this.fetchFeed()
     },
+    apiUrl() {
+      this.fetchFeed()
+    },
   },
   methods: {
     fetchFeed() {
@@ -105,12 +108,14 @@ export default {
         ...parsedUrl.query,
       })
       const apiUrlWithParams = `${parsedUrl.url}?${stringifiedParams}`
+      console.log(apiUrlWithParams)
       this.$store.dispatch(actionsTypes.getFeed, {
         apiUrl: apiUrlWithParams,
       })
     },
   },
   mounted() {
+    console.log(this.apiUrl)
     this.fetchFeed()
   },
 }
