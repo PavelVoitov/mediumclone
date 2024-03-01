@@ -47,7 +47,7 @@ import McvValidationsErrors from '@/components/ValidationsErrors.vue'
 import {actionTypes} from '@/store/modules/auth'
 
 export default {
-  name: 'SignIn',
+  name: 'McvSignIn',
   components: {McvValidationsErrors},
   data() {
     return {
@@ -61,12 +61,6 @@ export default {
       validationErrors: (state) => state.auth.validationErrors,
     }),
   },
-  // isSubmitting() {
-  //   return this.$store.state.auth.isSubmitting
-  // },
-  // validationErrors() {
-  //   return this.$store.state.auth.validationErrors
-  // },
   methods: {
     onSubmit() {
       this.$store

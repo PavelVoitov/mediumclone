@@ -1,9 +1,10 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import SignUp from '@/views/SignUp.vue'
-import SignIn from '@/views/SignIn.vue'
+import McvSignIn from '@/views/SignIn.vue'
 import GlobalFeed from '@/views/GlobalFeed.vue'
 import YourFeed from '@/views/YourFeed.vue'
 import TagFeed from '@/views/TagFeed.vue'
+import Article from '@/views/Article.vue'
 
 const routes = [
   {
@@ -38,7 +39,7 @@ const routes = [
   {
     path: '/sign-in',
     name: 'sign-in',
-    component: SignIn,
+    component: McvSignIn,
   },
   {
     path: '/settings',
@@ -63,7 +64,7 @@ const routes = [
   {
     path: '/articles/:slug',
     name: 'article',
-    component: GlobalFeed,
+    component: Article,
   },
   {
     path: '/articles/:slug/edit',
