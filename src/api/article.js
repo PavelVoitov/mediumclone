@@ -6,6 +6,10 @@ const getArticle = (slug) => {
     .then((response) => response.data.article)
 }
 
+const deleteArticle = (slug) => {
+  return axios.delete(`/article/${slug}`)
+}
 export default {
   getArticle,
+  deleteArticle,
 }
