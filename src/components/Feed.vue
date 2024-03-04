@@ -35,7 +35,7 @@
           <h1>{{ article.title }}</h1>
           <p>{{ article.description }}</p>
           <span>READ MORE</span>
-          TAG LIST
+          <mcv-tag-list :tags="article.tagList" />
         </router-link>
       </div>
       <mcv-pagination
@@ -56,10 +56,12 @@ import {limit} from '@/helpers/variables'
 import queryString from 'query-string'
 import McvLoading from '@/components/Loading.vue'
 import McvError from '@/components/Error.vue'
+import McvTagList from '@/components/TagList.vue'
 
 export default {
   name: 'McvFeed',
   components: {
+    McvTagList,
     McvError,
     McvLoading,
     McvPagination,
