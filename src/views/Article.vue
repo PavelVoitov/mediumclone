@@ -25,7 +25,7 @@
           <span v-if="isAuthor">
             <router-link
               :to="{name: 'editArticle', params: {slug: article.slug}}"
-              class="btn btn-outline-secondary btn-sm"
+              class="btn btn-outline-secondary btn-sm m-r-1"
             >
               <i class="ion-edit" />
               Edit Article
@@ -34,7 +34,7 @@
               class="btn btn-outline-danger btn-sm"
               @click="deleteArticle"
             >
-              <i class="ion-trash-a"> Delete Article </i>
+              <i class="ion-trash-a">Delete Article </i>
             </button>
           </span>
         </div>
@@ -76,10 +76,12 @@ export default {
       currentUser: authGetterTypes.currentUser,
     }),
     isAuthor() {
-      if (!this.currentUser || !this.article.username) {
+      console.log('currentUser', this.currentUser.username)
+      console.log('article.username', this.article.author.username)
+      if (!this.currentUser.username || !this.article.author.username) {
         return false
       }
-      return this.currentUser === this.article.username
+      return this.currentUser.username === this.article.author.username
     },
   },
   methods: {
