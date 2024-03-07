@@ -17,12 +17,20 @@ export const mutationTypes = {
   getCurrentUserStart: '[auth] getCurrentUserStart',
   getCurrentUserSuccess: '[auth] getCurrentUserSuccess',
   getCurrentUserFailed: '[auth] getCurrentUserFailed',
+
+  updateCurrentUserStart: '[auth] updateCurrentUserStart',
+  updateCurrentUserSuccess: '[auth]updateCurrentUserSuccess',
+  updateCurrentUserFailed: '[auth] updateCurrentUserFailed',
+
+  logout: '[auth] logout',
 }
 
 export const actionTypes = {
   register: '[auth] register',
   login: '[auth] login',
   getCurrentUser: '[auth] getCurrentUser',
+  updateCurrentUser: '[auth] updateCurrentUser',
+  logout: '[auth] logout',
 }
 
 export const getterTypes = {
@@ -69,6 +77,16 @@ const mutations = {
     state.isLoading = false
     state.isLoggedIn = false
     state.currentUser = null
+  },
+  [mutationTypes.updateCurrentUserStart]() {},
+  [mutationTypes.updateCurrentUserSuccess](state, payload) {
+    state.currentUser = payload
+  },
+  [mutationTypes.updateCurrentUserFailed]() {},
+
+  [mutationTypes.logout](state) {
+    state.currentUser = null
+    state.isLoggedIn = false
   },
 }
 
@@ -122,6 +140,30 @@ const actions = {
         .catch(() => {
           context.commit(mutationTypes.getCurrentUserFailed)
         })
+    })
+  },
+  [actionTypes.updateCurrentUser](context, {currentUserInput}) {
+    context.commit(mutationTypes.updateCurrentUserStart)
+    return new Promise((resolve) => {
+      authApi
+        .updateCurrentUser(currentUserInput)
+        .then((user) => {
+          context.commit(mutationTypes.updateCurrentUserSuccess, user)
+          resolve(user)
+        })
+        .catch((result) => {
+          context.commit(
+            mutationTypes.updateCurrentUserFailed,
+            result.response.data.errors
+          )
+        })
+    })
+  },
+  [actionTypes.logout](context) {
+    return new Promise((resolve) => {
+      setItem('accessToken', '')
+      context.commit(mutationTypes.logout)
+      resolve()
     })
   },
 }
