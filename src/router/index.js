@@ -8,6 +8,7 @@ import Article from '@/views/Article.vue'
 import CreateArticle from '@/views/CreateArticle.vue'
 import EditArticle from '@/views/EditArticle.vue'
 import Settings from '@/views/Settings.vue'
+import Foo from '@/views/Foo.vue'
 
 const routes = [
   {
@@ -69,6 +70,11 @@ const routes = [
     path: '/articles/:slug/edit',
     name: 'editArticle',
     component: EditArticle,
+  },
+  {
+    path: '/foo',
+    name: 'foo',
+    component: Foo,
   },
 ]
 
