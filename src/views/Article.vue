@@ -76,8 +76,6 @@ export default {
       currentUser: authGetterTypes.currentUser,
     }),
     isAuthor() {
-      console.log('currentUser', this.currentUser.username)
-      console.log('article.username', this.article.author.username)
       if (!this.currentUser.username || !this.article.author.username) {
         return false
       }
