@@ -15,7 +15,7 @@ This project is a simple platform where users can register, create, edit posts, 
 ## Running the Application
 1. **Clone the Repository:**
 ```bash
-git clone https://github.com/PavelVoitov/crypto-tracker.git
+git clone https://github.com/PavelVoitov/mediumclone.git
 ```
 2. **Install dependencies:**
 
