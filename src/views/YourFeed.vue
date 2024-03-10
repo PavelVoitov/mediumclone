@@ -20,6 +20,8 @@ import McvFeed from '@/components/Feed.vue'
 import MvcPopularTags from '@/components/PopularTags.vue'
 import McvBanner from '@/components/Banner.vue'
 import McvFeedToggle from '@/components/FeedToggle.vue'
+import {mapGetters} from 'vuex'
+import {getterTypes as authGetterTypes} from '@/store/modules/auth'
 export default {
   name: 'McvYourFeed',
   components: {
@@ -28,10 +30,13 @@ export default {
     McvFeed,
     MvcPopularTags,
   },
-  data() {
-    return {
-      apiUrl: '/articles/feed',
-    }
+  computed: {
+    ...mapGetters({
+      currentUser: authGetterTypes.currentUser,
+    }),
+    apiUrl() {
+      return `/articles?author=${this.currentUser.username}`
+    },
   },
 }
 </script>

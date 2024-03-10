@@ -89,7 +89,7 @@ export default {
       const isFavorites = this.$route.path.includes('favorites')
       return isFavorites
         ? `/articles?favorites=${this.userProfileSlug}`
-        : `/article?author=${this.userProfileSlug}`
+        : `/articles?author=${this.userProfileSlug}`
     },
     userProfileSlug() {
       return this.$route.params.slug
